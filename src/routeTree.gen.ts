@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardImagesRouteImport } from './routes/dashboard.images'
 import { Route as DashboardGeneratorRouteImport } from './routes/dashboard.generator'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/dashboard/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardImagesRoute = DashboardImagesRouteImport.update({
+  id: '/dashboard/images',
+  path: '/dashboard/images',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardGeneratorRoute = DashboardGeneratorRouteImport.update({
   id: '/dashboard/generator',
   path: '/dashboard/generator',
@@ -32,30 +38,39 @@ const DashboardGeneratorRoute = DashboardGeneratorRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
+  '/dashboard/images': typeof DashboardImagesRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
+  '/dashboard/images': typeof DashboardImagesRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
+  '/dashboard/images': typeof DashboardImagesRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard/generator' | '/dashboard/'
+  fullPaths: '/' | '/dashboard/generator' | '/dashboard/images' | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard/generator' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard/generator' | '/dashboard/'
+  to: '/' | '/dashboard/generator' | '/dashboard/images' | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard/generator'
+    | '/dashboard/images'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardGeneratorRoute: typeof DashboardGeneratorRoute
+  DashboardImagesRoute: typeof DashboardImagesRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -75,6 +90,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/images': {
+      id: '/dashboard/images'
+      path: '/dashboard/images'
+      fullPath: '/dashboard/images'
+      preLoaderRoute: typeof DashboardImagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/generator': {
       id: '/dashboard/generator'
       path: '/dashboard/generator'
@@ -88,6 +110,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardGeneratorRoute: DashboardGeneratorRoute,
+  DashboardImagesRoute: DashboardImagesRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 export const routeTree = rootRouteImport
