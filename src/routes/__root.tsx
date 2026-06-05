@@ -84,6 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Generate professional product cards, marketing content and AI product images at scale." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "ProductForge AI" },
+      { name: "twitter:description", content: "Generate professional product cards, marketing content and AI product images at scale." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4ccd2120-58cf-4cea-8a0e-77d34937346c/id-preview-d95a6dad--f3379dd5-d24d-44b8-926f-251ced4bf8eb.lovable.app-1780640536406.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4ccd2120-58cf-4cea-8a0e-77d34937346c/id-preview-d95a6dad--f3379dd5-d24d-44b8-926f-251ced4bf8eb.lovable.app-1780640536406.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
