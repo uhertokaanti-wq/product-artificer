@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardTeamRouteImport } from './routes/dashboard.team'
+import { Route as DashboardImagesRouteImport } from './routes/dashboard.images'
+import { Route as DashboardGeneratorRouteImport } from './routes/dashboard.generator'
+import { Route as DashboardCatalogRouteImport } from './routes/dashboard.catalog'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardTeamRoute = DashboardTeamRouteImport.update({
+  id: '/dashboard/team',
+  path: '/dashboard/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardImagesRoute = DashboardImagesRouteImport.update({
+  id: '/dashboard/images',
+  path: '/dashboard/images',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardGeneratorRoute = DashboardGeneratorRouteImport.update({
+  id: '/dashboard/generator',
+  path: '/dashboard/generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardCatalogRoute = DashboardCatalogRouteImport.update({
+  id: '/dashboard/catalog',
+  path: '/dashboard/catalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/dashboard/analytics',
+  path: '/dashboard/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/catalog': typeof DashboardCatalogRoute
+  '/dashboard/generator': typeof DashboardGeneratorRoute
+  '/dashboard/images': typeof DashboardImagesRoute
+  '/dashboard/team': typeof DashboardTeamRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/catalog': typeof DashboardCatalogRoute
+  '/dashboard/generator': typeof DashboardGeneratorRoute
+  '/dashboard/images': typeof DashboardImagesRoute
+  '/dashboard/team': typeof DashboardTeamRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
+  '/dashboard/catalog': typeof DashboardCatalogRoute
+  '/dashboard/generator': typeof DashboardGeneratorRoute
+  '/dashboard/images': typeof DashboardImagesRoute
+  '/dashboard/team': typeof DashboardTeamRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard/analytics'
+    | '/dashboard/catalog'
+    | '/dashboard/generator'
+    | '/dashboard/images'
+    | '/dashboard/team'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard/analytics'
+    | '/dashboard/catalog'
+    | '/dashboard/generator'
+    | '/dashboard/images'
+    | '/dashboard/team'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard/analytics'
+    | '/dashboard/catalog'
+    | '/dashboard/generator'
+    | '/dashboard/images'
+    | '/dashboard/team'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
+  DashboardCatalogRoute: typeof DashboardCatalogRoute
+  DashboardGeneratorRoute: typeof DashboardGeneratorRoute
+  DashboardImagesRoute: typeof DashboardImagesRoute
+  DashboardTeamRoute: typeof DashboardTeamRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +130,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/team': {
+      id: '/dashboard/team'
+      path: '/dashboard/team'
+      fullPath: '/dashboard/team'
+      preLoaderRoute: typeof DashboardTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/images': {
+      id: '/dashboard/images'
+      path: '/dashboard/images'
+      fullPath: '/dashboard/images'
+      preLoaderRoute: typeof DashboardImagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/generator': {
+      id: '/dashboard/generator'
+      path: '/dashboard/generator'
+      fullPath: '/dashboard/generator'
+      preLoaderRoute: typeof DashboardGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/catalog': {
+      id: '/dashboard/catalog'
+      path: '/dashboard/catalog'
+      fullPath: '/dashboard/catalog'
+      preLoaderRoute: typeof DashboardCatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/dashboard/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
+  DashboardCatalogRoute: DashboardCatalogRoute,
+  DashboardGeneratorRoute: DashboardGeneratorRoute,
+  DashboardImagesRoute: DashboardImagesRoute,
+  DashboardTeamRoute: DashboardTeamRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
