@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardGeneratorRouteImport } from './routes/dashboard.generator'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/dashboard/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardGeneratorRoute = DashboardGeneratorRouteImport.update({
+  id: '/dashboard/generator',
+  path: '/dashboard/generator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard/'
+  fullPaths: '/' | '/dashboard/generator' | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard/'
+  to: '/' | '/dashboard/generator' | '/dashboard'
+  id: '__root__' | '/' | '/dashboard/generator' | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardGeneratorRoute: typeof DashboardGeneratorRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/generator': {
+      id: '/dashboard/generator'
+      path: '/dashboard/generator'
+      fullPath: '/dashboard/generator'
+      preLoaderRoute: typeof DashboardGeneratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardGeneratorRoute: DashboardGeneratorRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 export const routeTree = rootRouteImport
