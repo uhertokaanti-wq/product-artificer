@@ -14,6 +14,7 @@ import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as DashboardImagesRouteImport } from './routes/dashboard.images'
 import { Route as DashboardGeneratorRouteImport } from './routes/dashboard.generator'
 import { Route as DashboardCatalogRouteImport } from './routes/dashboard.catalog'
+import { Route as DashboardAnalyticsRouteImport } from './routes/dashboard.analytics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,9 +41,15 @@ const DashboardCatalogRoute = DashboardCatalogRouteImport.update({
   path: '/dashboard/catalog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardAnalyticsRoute = DashboardAnalyticsRouteImport.update({
+  id: '/dashboard/analytics',
+  path: '/dashboard/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/catalog': typeof DashboardCatalogRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/images': typeof DashboardImagesRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/catalog': typeof DashboardCatalogRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/images': typeof DashboardImagesRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard/analytics': typeof DashboardAnalyticsRoute
   '/dashboard/catalog': typeof DashboardCatalogRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/images': typeof DashboardImagesRoute
@@ -67,6 +76,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard/analytics'
     | '/dashboard/catalog'
     | '/dashboard/generator'
     | '/dashboard/images'
@@ -74,6 +84,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard/analytics'
     | '/dashboard/catalog'
     | '/dashboard/generator'
     | '/dashboard/images'
@@ -81,6 +92,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/dashboard/analytics'
     | '/dashboard/catalog'
     | '/dashboard/generator'
     | '/dashboard/images'
@@ -89,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardAnalyticsRoute: typeof DashboardAnalyticsRoute
   DashboardCatalogRoute: typeof DashboardCatalogRoute
   DashboardGeneratorRoute: typeof DashboardGeneratorRoute
   DashboardImagesRoute: typeof DashboardImagesRoute
@@ -132,11 +145,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardCatalogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/analytics': {
+      id: '/dashboard/analytics'
+      path: '/dashboard/analytics'
+      fullPath: '/dashboard/analytics'
+      preLoaderRoute: typeof DashboardAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardAnalyticsRoute: DashboardAnalyticsRoute,
   DashboardCatalogRoute: DashboardCatalogRoute,
   DashboardGeneratorRoute: DashboardGeneratorRoute,
   DashboardImagesRoute: DashboardImagesRoute,
