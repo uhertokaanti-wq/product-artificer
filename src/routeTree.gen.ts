@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardTeamRouteImport } from './routes/dashboard.team'
 import { Route as DashboardImagesRouteImport } from './routes/dashboard.images'
 import { Route as DashboardGeneratorRouteImport } from './routes/dashboard.generator'
 import { Route as DashboardCatalogRouteImport } from './routes/dashboard.catalog'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardTeamRoute = DashboardTeamRouteImport.update({
+  id: '/dashboard/team',
+  path: '/dashboard/team',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardImagesRoute = DashboardImagesRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/catalog': typeof DashboardCatalogRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/images': typeof DashboardImagesRoute
+  '/dashboard/team': typeof DashboardTeamRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/dashboard/catalog': typeof DashboardCatalogRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/images': typeof DashboardImagesRoute
+  '/dashboard/team': typeof DashboardTeamRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/dashboard/catalog': typeof DashboardCatalogRoute
   '/dashboard/generator': typeof DashboardGeneratorRoute
   '/dashboard/images': typeof DashboardImagesRoute
+  '/dashboard/team': typeof DashboardTeamRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/dashboard/catalog'
     | '/dashboard/generator'
     | '/dashboard/images'
+    | '/dashboard/team'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/dashboard/catalog'
     | '/dashboard/generator'
     | '/dashboard/images'
+    | '/dashboard/team'
     | '/dashboard'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/dashboard/catalog'
     | '/dashboard/generator'
     | '/dashboard/images'
+    | '/dashboard/team'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   DashboardCatalogRoute: typeof DashboardCatalogRoute
   DashboardGeneratorRoute: typeof DashboardGeneratorRoute
   DashboardImagesRoute: typeof DashboardImagesRoute
+  DashboardTeamRoute: typeof DashboardTeamRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/team': {
+      id: '/dashboard/team'
+      path: '/dashboard/team'
+      fullPath: '/dashboard/team'
+      preLoaderRoute: typeof DashboardTeamRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/images': {
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardCatalogRoute: DashboardCatalogRoute,
   DashboardGeneratorRoute: DashboardGeneratorRoute,
   DashboardImagesRoute: DashboardImagesRoute,
+  DashboardTeamRoute: DashboardTeamRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 export const routeTree = rootRouteImport
